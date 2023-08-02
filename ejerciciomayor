@@ -1,0 +1,6 @@
+num1 = int(input('ingrese un numero: '))
+num2 = int(input('ingrese un numero: '))
+if num1<num2:
+    print('el numero ',num1, 'es menor que el numero ', num2)
+else:
+    print('el numero ',num2, 'es menor que el numero ', num1)
