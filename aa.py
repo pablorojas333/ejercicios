@@ -2,14 +2,14 @@ import tkinter as tk
 from tkinter import messagebox
 
 class AdivinanzaApp:
-    def _init_(self, root):
+    def __init__(self,root):
         self.root = root
         self.root.title("Adivinanza")
 
         self.label_instrucciones = tk.Label(root, text="ADIVINANZA 1.")
         self.label_instrucciones.pack()
 
-        adivinanza = "Blanco por dentro, verde por fuera. Si quieres que te lo diga, espera."
+        adivinanza = "Me rascan continuamente de forma muy placentera, mi voz es muy bien timbrada y mi cuerpo de madera.."
         self.label_adivinanza = tk.Label(root, text=adivinanza)
         self.label_adivinanza.pack()
 
@@ -27,13 +27,13 @@ class AdivinanzaApp:
 
     def verificar_respuesta(self):
         respuesta = self.entry_respuesta.get().lower()
-        if respuesta == "pera":
+        if respuesta == "guitarra":
             resultado = "¡Correcto! ¡Felicitaciones!"
             emoji = "\U0001F600"
         else:
-            resultado = "Incorrecto. La respuesta es 'pera'."
+            resultado = "Incorrecto. La respuesta es 'guitarra'."
             emoji = "\U0001F92A"
-        self.label_resultado.config(text=resultado + f" {emoji*3}")
+        self.label_resultado.config(text=resultado) #+ f" {emoji*3}")
 
 # Crear ventana principal
 root = tk.Tk()
