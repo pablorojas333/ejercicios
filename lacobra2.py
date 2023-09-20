@@ -31,10 +31,10 @@ class SnakeApp:
         self.snake = [(ANCHO // 2, ALTO // 2)]
         self.direccion = (0, 1)  # Iniciar moviéndose hacia abajo
         self.comida = self.generar_comida()
+        self.velocidad = 100
         self.puntuacion = 0
         self.actualizar_tablero()
-        self.root.after(VELOCIDAD, self.mover_serpiente)
-    
+        self.root.after(self.velocidad, self.mover_serpiente)
     def generar_comida(self):
         while True:
             x = random.randint(0, ANCHO - 1)
@@ -114,3 +114,4 @@ class SnakeApp:
 root = tk.Tk()
 app = SnakeApp(root)
 root.mainloop()
+
