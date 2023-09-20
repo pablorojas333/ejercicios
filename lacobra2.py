@@ -1,4 +1,3 @@
-# The SnakeApp class creates a simple snake game using the tkinter library in Python.
 import tkinter as tk
 import random
 
@@ -27,7 +26,6 @@ class SnakeApp:
         
         self.iniciar_juego()
     
-
     def iniciar_juego(self):
         self.tablero = [[0] * ANCHO for _ in range(ALTO)]
         self.snake = [(ANCHO // 2, ALTO // 2)]
@@ -57,7 +55,6 @@ class SnakeApp:
         
         self.canvas.create_text(50, 10, text=f"Puntuación: {self.puntuacion}", fill="white")
     
-    
     def tecla_presionada(self, event):
         if event.keysym == "Left" and self.direccion != (1, 0):
             self.direccion = (-1, 0)
@@ -68,6 +65,7 @@ class SnakeApp:
         elif event.keysym == "Down" and self.direccion != (0, -1):
             self.direccion = (0, 1)
 
+    # ...
     def mover_serpiente(self):
         x, y = self.snake[0]
         dx, dy = self.direccion
@@ -78,7 +76,7 @@ class SnakeApp:
             self.mostrar_fin_juego()
             return
         
-        if (nuevo_x, nuevo_y) in self.tablero[1:]:
+        if not (0 <= nuevo_x < ANCHO) or not (0 <= nuevo_y < ALTO):
             self.mostrar_fin_juego()
             return
         
@@ -93,12 +91,25 @@ class SnakeApp:
         self.actualizar_tablero()
         
         self.root.after(VELOCIDAD, self.mover_serpiente)
+# ...
+
     
     def mostrar_fin_juego(self):
         self.canvas.delete("all")
         self.canvas.create_text(ANCHO * TAMANO_CELDA // 2, ALTO * TAMANO_CELDA // 2,
-                                text=f"Fin del juego\nPuntuación: {self.puntuacion}", fill="white",
+                                text=f"¡Fin del juego!\nPuntuación: {self.puntuacion}", fill="white",
                                 font=("Helvetica", 16), anchor="center")
+        # Agregar opción para reiniciar el juego
+        self.canvas.create_text(ANCHO * TAMANO_CELDA // 2, ALTO * TAMANO_CELDA // 2 + 40,
+                                text="Presiona R para reiniciar", fill="white",
+                                font=("Helvetica", 12), anchor="center")
+        self.canvas.bind("<KeyPress-R>", self.reiniciar_juego)
+    
+    def reiniciar_juego(self, event):
+        # Eliminar el mensaje de fin de juego y reiniciar el juego
+        self.canvas.delete("all")
+        self.iniciar_juego()
+
 # Crear ventana principal
 root = tk.Tk()
 app = SnakeApp(root)
